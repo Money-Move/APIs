@@ -18,7 +18,7 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "resolveJsonModule": true,
     "typeRoots": [
       "./node_modules/@types",

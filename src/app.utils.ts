@@ -14,6 +14,7 @@ import {
   ValidationError,
   ValidationPipe,
 } from '@nestjs/common';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 export const createApplication = async () => {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -55,7 +56,17 @@ export const createApplication = async () => {
     root: join(process.cwd(), configuration().uploadDir),
   });
 
-  app.enableCors();
+  const corsOptions: CorsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+    allowedHeaders:
+      'Content-Type, Accept, Authorization, X-Requested-With, X-Access-Token',
+  };
+
+  app.enableCors(corsOptions);
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 

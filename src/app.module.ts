@@ -7,6 +7,8 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggerModule } from 'common/services';
 import { ScheduleModule } from '@nestjs/schedule';
 import { HttpModule } from '@nestjs/axios';
+import { CodexModule } from 'money_move';
+import { createConnectionMongoose } from 'databases/mongodb';
 
 @Module({
   imports: [
@@ -15,8 +17,10 @@ import { HttpModule } from '@nestjs/axios';
       load: [configuration],
       isGlobal: true,
     }),
+    ...createConnectionMongoose(),
     LoggerModule,
     HttpModule,
+    CodexModule,
   ],
   controllers: [AppController],
   providers: [
